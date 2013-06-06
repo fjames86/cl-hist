@@ -54,6 +54,7 @@
 			(hist-start2 h) (hist-end2 h) (hist-num2 h))))
 
 (defun make-hist (start end num)
+  "Make a histogram"
   (make-instance 'hist
 				 :data (make-array num :initial-element 0.0)
 				 :start start
@@ -75,6 +76,7 @@
 				 :step2 (coerce (/ (- end2 start2) num2) 'float)))
 
 (defun update-hist (h val &optional (amount 1))
+  "Update the histogram with the value"
   (let ((p (floor (- val (hist-start h))
 				  (hist-step h))))
 	(if (and (>= p 0) (< p (hist-num h)))
@@ -98,14 +100,15 @@
 		  t))))
 
 (defun output-hist (h stream)
+  "Output a histogram to a stream"
   (dotimes (i (hist-num h))
 	(let ((x (+ (hist-start h)
 				(* (hist-step h) i))))
 	  (format stream "~A ~A ~A~%"
 			  x
-			  (svref (hist-data h) i)
 			  (/ (svref (hist-data h) i)
-				 (* (hist-step h) (hist-counter h)))))))
+				 (* (hist-step h) (hist-counter h)))
+			  (svref (hist-data h) i)))))
 
 (defun output-hist-2d (h stream)
   (dotimes (i (hist-num1 h))
@@ -116,9 +119,9 @@
 					(* (hist-step2 h) j))))
 		  (format stream "~A ~A ~A ~A~%"
 				  x y
-				  (aref (hist-data h) i j)
 				  (/ (svref (hist-data h) i)
-					 (* (hist-step1 h) (hist-step2 h) (hist-counter h)))))))))
+					 (* (hist-step1 h) (hist-step2 h) (hist-counter h)))
+				  (aref (hist-data h) i j)))))))
 
 (defun reset-hist (h)
   (setf (hist-counter h) 0)
