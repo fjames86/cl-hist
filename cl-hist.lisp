@@ -1,4 +1,13 @@
 
+;;;; 1d and 2d histograms package.
+;;;;
+;;;; All 1d functions has equivalent 2d functions with the -2d suffix
+;;;;
+;;;; Copyright (C) 2013 Frank James
+;;;;
+;;;; You are granted the rights to distribute and use this software
+;;;; as governed by the terms of the Lisp Lesser General Public License
+;;;; (http://opensource.franz.com/preamble.html), also known as the LLGPL.
 
 (defpackage #:cl-hist
   (:use #:cl)  
